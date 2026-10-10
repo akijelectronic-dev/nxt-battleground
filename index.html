@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0a0e1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="author" content="AL-AMIN">
+<title>NXT BATTLEGROUND — AL-AMIN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- ROTATE PROMPT (Mobile Portrait) -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="rotate-prompt" id="rotatePrompt">
+  <div class="rotate-content">
+    <div class="rotate-icon">
+      <i class="fas fa-mobile-alt"></i>
+    </div>
+    <h2>ROTATE YOUR DEVICE</h2>
+    <p>সেরা অভিজ্ঞতার জন্য ডিভাইস ঘুরিয়ে <b>Landscape</b> করুন</p>
+    <div class="rotate-arrows">
+      <i class="fas fa-sync-alt"></i>
+    </div>
+    <button class="rotate-btn" onclick="hideRotatePrompt()">
+      <i class="fas fa-check"></i> I UNDERSTAND
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SPLASH SCREEN -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="splash">
+  <div class="splash-content">
+    <div class="splash-logo">⚔️</div>
+    <h1 class="splash-title">NXT BATTLEGROUND</h1>
+    <p class="splash-sub">BATTLE ROYALE</p>
+    <div class="splash-player">Player: AL-AMIN</div>
+    <div class="boot-progress"><div class="boot-bar" id="bootBar"></div></div>
+    <div class="boot-text" id="bootText">LOADING...</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- MAIN MENU -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="screen" id="mainMenu">
+  <div class="menu-bg"></div>
+  
+  <div class="menu-header">
+    <div class="player-card">
+      <div class="player-avatar">A</div>
+      <div class="player-info">
+        <div class="player-name">AL-AMIN</div>
+        <div class="player-level">Level <span id="playerLevel">1</span></div>
+        <div class="player-xp-bar">
+          <div class="player-xp-fill" id="playerXpFill" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="menu-currency">
+      <div class="currency-item">
+        <i class="fas fa-coins"></i>
+        <span id="menuCoins">0</span>
+      </div>
+      <div class="currency-item">
+        <i class="fas fa-trophy"></i>
+        <span id="menuWins">0</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-title">
+    <h1>NXT BATTLEGROUND</h1>
+    <p>Battle Royale • 20 Players • Last One Standing</p>
+  </div>
+
+  <div class="menu-buttons">
+    <button class="menu-btn primary" onclick="startMatch()">
+      <i class="fas fa-play"></i>
+      <span>PLAY</span>
+      <small>Battle Royale</small>
+    </button>
+    
+    <button class="menu-btn" onclick="openCharacterSelect()">
+      <i class="fas fa-user-astronaut"></i>
+      <span>CHARACTER</span>
+      <small>Outfits & Skins</small>
+    </button>
+    
+    <button class="menu-btn" onclick="openInventory()">
+      <i class="fas fa-box"></i>
+      <span>INVENTORY</span>
+      <small>Items & Weapons</small>
+    </button>
+    
+    <button class="menu-btn" onclick="openLeaderboard()">
+      <i class="fas fa-trophy"></i>
+      <span>LEADERBOARD</span>
+      <small>Top Players</small>
+    </button>
+    
+    <button class="menu-btn" onclick="openSettings()">
+      <i class="fas fa-cog"></i>
+      <span>SETTINGS</span>
+      <small>Customize</small>
+    </button>
+  </div>
+
+  <div class="menu-footer">
+    <span>v1.0</span>
+    <span>•</span>
+    <span>Made by AL-AMIN</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- CHARACTER SELECT -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="screen" id="characterSelect">
+  <div class="screen-header">
+    <button class="back-btn" onclick="backToMenu()">
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+    <h2>CHARACTER</h2>
+    <div></div>
+  </div>
+  
+  <div class="char-grid" id="charGrid"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- INVENTORY -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="screen" id="inventoryScreen">
+  <div class="screen-header">
+    <button class="back-btn" onclick="backToMenu()">
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+    <h2>INVENTORY</h2>
+    <div></div>
+  </div>
+  
+  <div class="inventory-content" id="inventoryContent"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- LEADERBOARD -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="screen" id="leaderboardScreen">
+  <div class="screen-header">
+    <button class="back-btn" onclick="backToMenu()">
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+    <h2>LEADERBOARD</h2>
+    <div></div>
+  </div>
+  
+  <div class="leaderboard-content" id="leaderboardContent"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SETTINGS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="screen" id="settingsScreen">
+  <div class="screen-header">
+    <button class="back-btn" onclick="backToMenu()">
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+    <h2>SETTINGS</h2>
+    <div></div>
+  </div>
+  
+  <div class="settings-content">
+    <div class="settings-tabs">
+      <button class="settings-tab active" data-tab="hud" onclick="switchSettingsTab('hud')">
+        <i class="fas fa-th-large"></i> HUD
+      </button>
+      <button class="settings-tab" data-tab="controls" onclick="switchSettingsTab('controls')">
+        <i class="fas fa-gamepad"></i> Controls
+      </button>
+      <button class="settings-tab" data-tab="audio" onclick="switchSettingsTab('audio')">
+        <i class="fas fa-volume-up"></i> Audio
+      </button>
+      <button class="settings-tab" data-tab="graphics" onclick="switchSettingsTab('graphics')">
+        <i class="fas fa-image"></i> Graphics
+      </button>
+    </div>
+
+    <!-- HUD Tab -->
+    <div class="settings-panel active" id="panel-hud">
+      <h3>HUD LAYOUT</h3>
+      <p class="settings-desc">Drag and drop to customize your HUD</p>
+      
+      <div class="hud-editor">
+        <div class="hud-element" data-el="health" style="top:20px;left:20px">
+          <div class="he-bar-small"><i class="fas fa-heart"></i></div>
+        </div>
+        <div class="hud-element" data-el="shield" style="top:60px;left:20px">
+          <div class="he-bar-small"><i class="fas fa-shield-alt"></i></div>
+        </div>
+        <div class="hud-element" data-el="kills" style="top:20px;right:20px">
+          <div class="he-bar-small"><i class="fas fa-skull"></i> 3</div>
+        </div>
+        <div class="hud-element" data-el="alive" style="top:20px;left:50%">
+          <div class="he-bar-small"><i class="fas fa-users"></i> 12/20</div>
+        </div>
+        <div class="hud-element" data-el="minimap" style="top:80px;right:20px">
+          <div class="he-bar-small he-minimap"><i class="fas fa-map"></i></div>
+        </div>
+      </div>
+      
+      <div class="hud-options">
+        <label>HUD Scale
+          <input type="range" id="hudScale" min="50" max="150" value="100" oninput="updateHudScale(this.value)">
+        </label>
+        <label>Opacity
+          <input type="range" id="hudOpacity" min="30" max="100" value="100" oninput="updateHudOpacity(this.value)">
+        </label>
+      </div>
+      
+      <button class="settings-btn" onclick="saveHudLayout()">
+        <i class="fas fa-save"></i> Save Layout
+      </button>
+      <button class="settings-btn danger" onclick="resetHudLayout()">
+        <i class="fas fa-undo"></i> Reset
+      </button>
+    </div>
+
+    <!-- Controls Tab -->
+    <div class="settings-panel" id="panel-controls">
+      <h3>CONTROLS</h3>
+      <p class="settings-desc">Customize your control layout</p>
+      
+      <div class="control-settings">
+        <label>Joystick Size
+          <select id="joystickSize" onchange="updateJoystickSize(this.value)">
+            <option value="small">Small</option>
+            <option value="medium" selected>Medium</option>
+            <option value="large">Large</option>
+          </select>
+        </label>
+        
+        <label>Sensitivity
+          <input type="range" id="sensitivity" min="1" max="10" value="5" oninput="updateSensitivity(this.value)">
+          <span id="sensValue">5</span>
+        </label>
+        
+        <label>Button Opacity
+          <input type="range" id="btnOpacity" min="30" max="100" value="100" oninput="updateBtnOpacity(this.value)">
+        </label>
+        
+        <label>Left-Handed Mode
+          <input type="checkbox" id="leftHanded" onchange="toggleLeftHanded(this.checked)">
+        </label>
+      </div>
+      
+      <button class="settings-btn" onclick="resetControls()">
+        <i class="fas fa-undo"></i> Reset Default
+      </button>
+    </div>
+
+    <!-- Audio Tab -->
+    <div class="settings-panel" id="panel-audio">
+      <h3>AUDIO</h3>
+      
+      <div class="audio-settings">
+        <label>Master Volume
+          <input type="range" id="masterVolume" min="0" max="100" value="80" oninput="updateMasterVolume(this.value)">
+          <span id="masterVolValue">80%</span>
+        </label>
+        
+        <label>Music Volume
+          <input type="range" id="musicVolume" min="0" max="100" value="50" oninput="updateMusicVolume(this.value)">
+          <span id="musicVolValue">50%</span>
+        </label>
+        
+        <label>Effects Volume
+          <input type="range" id="effectsVolume" min="0" max="100" value="80" oninput="updateEffectsVolume(this.value)">
+          <span id="effectsVolValue">80%</span>
+        </label>
+        
+        <label>Voice Volume
+          <input type="range" id="voiceVolume" min="0" max="100" value="70" oninput="updateVoiceVolume(this.value)">
+          <span id="voiceVolValue">70%</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Graphics Tab -->
+    <div class="settings-panel" id="panel-graphics">
+      <h3>GRAPHICS</h3>
+      
+      <div class="graphics-settings">
+        <label>Quality
+          <select id="graphicsQuality" onchange="updateGraphicsQuality(this.value)">
+            <option value="low">Low (Best FPS)</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High (Best Visual)</option>
+          </select>
+        </label>
+        
+        <label>Show FPS Counter
+          <input type="checkbox" id="showFps" onchange="toggleFps(this.checked)">
+        </label>
+        
+        <label>Blood Effects
+          <input type="checkbox" id="bloodEffects" checked onchange="toggleBlood(this.checked)">
+        </label>
+        
+        <label>Particle Effects
+          <input type="checkbox" id="particleEffects" checked onchange="toggleParticles(this.checked)">
+        </label>
+        
+        <label>Screen Shake
+          <input type="checkbox" id="screenShake" checked onchange="toggleScreenShake(this.checked)">
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- GAME SCREEN -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="screen" id="gameScreen">
+  
+  <!-- Canvas -->
+  <canvas id="gameCanvas"></canvas>
+  
+  <!-- ═══ IN-GAME HUD ═══ -->
+  <div class="hud" id="gameHud">
+    
+    <!-- TOP HUD -->
+    <div class="hud-top">
+      <div class="hud-top-left">
+        <div class="hud-bar health-bar">
+          <i class="fas fa-heart"></i>
+          <div class="hud-bar-track">
+            <div class="hud-bar-fill" id="healthFill"></div>
+          </div>
+          <span class="hud-bar-text" id="healthText">100</span>
+        </div>
+        <div class="hud-bar shield-bar">
+          <i class="fas fa-shield-alt"></i>
+          <div class="hud-bar-track">
+            <div class="hud-bar-fill" id="shieldFill"></div>
+          </div>
+          <span class="hud-bar-text" id="shieldText">100</span>
+        </div>
+      </div>
+      
+      <div class="hud-top-center">
+        <div class="zone-info">
+          <i class="fas fa-circle-notch"></i>
+          <span id="zoneTimer">60s</span>
+        </div>
+        <div class="alive-info">
+          <i class="fas fa-users"></i>
+          <span id="aliveCount">20</span>/20
+        </div>
+      </div>
+      
+      <div class="hud-top-right">
+        <div class="minimap" id="minimap">
+          <canvas id="minimapCanvas" width="150" height="150"></canvas>
+          <div class="minimap-border"></div>
+        </div>
+        <div class="kill-counter">
+          <i class="fas fa-skull"></i>
+          <span id="killCount">0</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- KILL FEED -->
+    <div class="kill-feed" id="killFeed"></div>
+    
+    <!-- CENTER CROSSHAIR -->
+    <div class="crosshair" id="crosshair">
+      <div class="crosshair-dot"></div>
+      <div class="crosshair-line top"></div>
+      <div class="crosshair-line bottom"></div>
+      <div class="crosshair-line left"></div>
+      <div class="crosshair-line right"></div>
+    </div>
+    
+    <!-- HIT MARKER -->
+    <div class="hit-marker" id="hitMarker">✖</div>
+    
+    <!-- DAMAGE INDICATOR -->
+    <div class="damage-indicator" id="damageIndicator"></div>
+    
+    <!-- FPS COUNTER -->
+    <div class="fps-counter" id="fpsCounter">60 FPS</div>
+    
+    <!-- ═══ MOBILE CONTROLS ═══ -->
+    <div class="mobile-controls" id="mobileControls">
+      
+      <!-- LEFT JOYSTICK (MOVE) -->
+      <div class="joystick-container left" id="leftJoystick">
+        <div class="joystick-base">
+          <div class="joystick-knob"></div>
+        </div>
+      </div>
+      
+      <!-- RIGHT JOYSTICK (AIM) -->
+      <div class="joystick-container right" id="rightJoystick">
+        <div class="joystick-base">
+          <div class="joystick-knob"></div>
+        </div>
+      </div>
+      
+      <!-- ACTION BUTTONS -->
+      <div class="action-buttons">
+        <button class="action-btn fire-btn" id="fireBtn">
+          <i class="fas fa-crosshairs"></i>
+        </button>
+        <button class="action-btn" id="reloadBtn" onclick="playerReload()">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+        <button class="action-btn" id="healBtn" onclick="playerHeal()">
+          <i class="fas fa-medkit"></i>
+        </button>
+        <button class="action-btn" id="grenadeBtn" onclick="playerThrowGrenade()">
+          <i class="fas fa-bomb"></i>
+        </button>
+        <button class="action-btn" id="crouchBtn" onclick="toggleCrouch()">
+          <i class="fas fa-angle-down"></i>
+        </button>
+        <button class="action-btn" id="sprintBtn" onclick="toggleSprint()">
+          <i class="fas fa-running"></i>
+        </button>
+        <button class="action-btn" id="inventoryBtn" onclick="toggleInventory()">
+          <i class="fas fa-briefcase"></i>
+        </button>
+        <button class="action-btn" id="mapBtn" onclick="toggleMap()">
+          <i class="fas fa-map"></i>
+        </button>
+      </div>
+      
+      <!-- WEAPON DISPLAY (Bottom Center) -->
+      <div class="weapon-display">
+        <div class="weapon-icon" id="weaponIcon">🔫</div>
+        <div class="weapon-info">
+          <div class="weapon-name" id="weaponName">AK47</div>
+          <div class="weapon-ammo">
+            <span id="ammoCurrent">30</span>
+            <span class="ammo-separator">/</span>
+            <span id="ammoReserve">120</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- ITEMS BAR (Bottom) -->
+      <div class="items-bar">
+        <div class="item-slot">
+          <div class="item-icon" id="helmetIcon">🪖</div>
+          <div class="item-level" id="helmetLevel">Lv1</div>
+        </div>
+        <div class="item-slot">
+          <div class="item-icon" id="vestIcon">🦺</div>
+          <div class="item-level" id="vestLevel">Lv1</div>
+        </div>
+        <div class="item-slot">
+          <div class="item-icon" id="backpackIcon">🎒</div>
+          <div class="item-level" id="backpackLevel">Lv1</div>
+        </div>
+        <div class="item-slot">
+          <div class="item-icon">💊</div>
+          <div class="item-level" id="medkitCount">x3</div>
+        </div>
+        <div class="item-slot">
+          <div class="item-icon">💣</div>
+          <div class="item-level" id="grenadeCount">x2</div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- ═══ PC CONTROLS HINT ═══ -->
+    <div class="pc-controls-hint" id="pcControlsHint">
+      <div class="hint-item">
+        <kbd>WASD</kbd> Move
+      </div>
+      <div class="hint-item">
+        <kbd>Mouse</kbd> Aim
+      </div>
+      <div class="hint-item">
+        <kbd>Click</kbd> Shoot
+      </div>
+      <div class="hint-item">
+        <kbd>R</kbd> Reload
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- ═══ FULL MAP OVERLAY ═══ -->
+  <div class="full-map" id="fullMap">
+    <div class="full-map-header">
+      <h2>MAP</h2>
+      <button onclick="toggleMap()"><i class="fas fa-times"></i></button>
+    </div>
+    <canvas id="fullMapCanvas" width="600" height="600"></canvas>
+  </div>
+  
+  <!-- ═══ INVENTORY OVERLAY ═══ -->
+  <div class="inventory-overlay" id="inventoryOverlay">
+    <div class="inv-header">
+      <h2>🎒 INVENTORY</h2>
+      <button onclick="toggleInventory()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="inv-content" id="invContent"></div>
+  </div>
+  
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- DEATH SCREEN -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="screen" id="deathScreen">
+  <div class="death-content">
+    <div class="death-title">YOU DIED</div>
+    <div class="death-killer">Killed by <b id="killerName">Bot_01</b></div>
+    <div class="death-stats">
+      <div class="death-stat">
+        <div class="stat-value" id="deathRank">#15</div>
+        <div class="stat-label">RANK</div>
+      </div>
+      <div class="death-stat">
+        <div class="stat-value" id="deathKills">3</div>
+        <div class="stat-label">KILLS</div>
+      </div>
+      <div class="death-stat">
+        <div class="stat-value" id="deathDamage">450</div>
+        <div class="stat-label">DAMAGE</div>
+      </div>
+      <div class="death-stat">
+        <div class="stat-value" id="deathSurvived">2:30</div>
+        <div class="stat-label">SURVIVED</div>
+      </div>
+    </div>
+    <div class="death-buttons">
+      <button class="menu-btn" onclick="startMatch()">
+        <i class="fas fa-redo"></i> PLAY AGAIN
+      </button>
+      <button class="menu-btn" onclick="backToMenu()">
+        <i class="fas fa-home"></i> MAIN MENU
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- VICTORY SCREEN -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="screen" id="victoryScreen">
+  <div class="victory-content">
+    <div class="victory-title">BOOYAH!</div>
+    <div class="victory-sub">#1 VICTORY</div>
+    <div class="victory-crown">👑</div>
+    <div class="victory-stats">
+      <div class="victory-stat">
+        <div class="stat-value" id="victoryKills">10</div>
+        <div class="stat-label">KILLS</div>
+      </div>
+      <div class="victory-stat">
+        <div class="stat-value" id="victoryDamage">1850</div>
+        <div class="stat-label">DAMAGE</div>
+      </div>
+      <div class="victory-stat">
+        <div class="stat-value" id="victoryTime">5:30</div>
+        <div class="stat-label">TIME</div>
+      </div>
+      <div class="victory-stat">
+        <div class="stat-value" id="victoryXp">+250</div>
+        <div class="stat-label">XP</div>
+      </div>
+    </div>
+    <div class="victory-buttons">
+      <button class="menu-btn primary" onclick="startMatch()">
+        <i class="fas fa-redo"></i> PLAY AGAIN
+      </button>
+      <button class="menu-btn" onclick="backToMenu()">
+        <i class="fas fa-home"></i> MAIN MENU
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- MATCH LOADING SCREEN -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="screen" id="matchLoading">
+  <div class="loading-content">
+    <div class="loading-title">MATCH FOUND</div>
+    <div class="loading-players">
+      <div class="loading-count">
+        <span id="loadingPlayerCount">20</span>
+        <small>PLAYERS</small>
+      </div>
+    </div>
+    <div class="loading-timer">
+      <div class="loading-countdown" id="loadingCountdown">3</div>
+    </div>
+    <div class="loading-tip" id="loadingTip">Dropping in...</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- TOAST -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SCRIPTS (Part 3+ এগুলো তৈরি হবে) -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<script src="config.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>
